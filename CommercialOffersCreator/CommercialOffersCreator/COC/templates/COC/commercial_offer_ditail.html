@@ -1,0 +1,16 @@
+{% extends 'COC/base_COC.html' %}
+
+{% block title %}
+  Commercial offer
+{% endblock %}
+
+
+{% block content %}
+  <h1 class="mt-5 mb-4">{{commercialoffer.creation_date}}</h1>
+  <p><b>Customer:</b> {{commercialoffer.customer.denomination}}</p>
+  <p><b>items:</b></p>
+  {% for product in commercialoffer.products.all %}
+    {% include 'COC/includes/product_card_template.html' %}
+  {% endfor %}
+  <a href="{% url 'get_pdf_url' id=commercialoffer.id %}" class="btn btn-secondary">Get PDF</a>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'COC/base_COC.html' %}
+
+{% block title %}
+    Delete Commercial offer
+{% endblock %}
+
+{% block content %}
+    <form action="{{ commercialoffer.commercial_offer_delete_url }}" method="post">
+        {% csrf_token %}
+
+        <h1>Are you sure you want to delete the commercial offer?</h1>
+
+        <button type="submit" class='btn btn-danger'>Delete</button>
+    </form>
+{% endblock %}

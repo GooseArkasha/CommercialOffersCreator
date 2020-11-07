@@ -1,0 +1,13 @@
+{% extends 'COC/base_COC.html' %}
+
+{% block title %}
+  Cummercial offers list
+{% endblock %}
+
+{% block content %}
+  <h1 class="mb-5">Commercial offers:</h1>
+
+  {% for commercialoffer in commercialoffers %}
+    {% include 'COC/includes/commercial_offer_card_template.html' %}
+  {% endfor %}
+{% endblock %}

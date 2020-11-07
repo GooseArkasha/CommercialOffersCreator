@@ -44,32 +44,32 @@
     		<tr>
           <td><p><i>company name</i></p></td>
     			<td>{{seller.denomination}}</td>
-    			<td>{{customer.denomination}}</td>
+    			<td>{{commercialoffer.customer.denomination}}</td>
     		</tr>
     		<tr>
           <td><p><i>address</i></p></td>
     			<td>{{seller.address}}</td>
-    			<td>{{customer.address}}</td>
+    			<td>{{commercialoffer.customer.address}}</td>
     		</tr>
     		<tr>
           <td><p><i>index</i></p></td>
     			<td>{{seller.index}}</td>
-    			<td>{{customer.index}}</td>
+    			<td>{{commercialoffer.customer.index}}</td>
     		</tr>
         <tr>
           <td><p><i>telephone</i></p></td>
           <td>{{seller.telephone}}</td>
-          <td>{{customer.telephone}}</td>
+          <td>{{commercialoffer.customer.telephone}}</td>
         </tr>
         <tr>
           <td><p><i>Contact Person Phone Number</i></p></td>
           <td>{{seller.contactPersonPhoneNumber}}</td>
-          <td>{{customer.contactPersonPhoneNumber}}</td>
+          <td>{{commercialoffer.customer.contactPersonPhoneNumber}}</td>
         </tr>
         <tr>
           <td><p><i>Contact Person Email</i></p></td>
           <td>{{seller.contactPersonEmail}}</td>
-          <td>{{customer.contactPersonEmail}}</td>
+          <td>{{commercialoffer.customer.contactPersonEmail}}</td>
         </tr>
     </table>
     <br>
@@ -83,21 +83,17 @@
     		<th>PRODUCT</th>
     		<th></th>
         <th>LIST PRICE</th>
-    		<th>QUANTITY</th>
-    		<th>TOTAL</th>
     	</tr>
-      {% for poduct in products %}
+      {% for poduct in commercialoffer.products.all %}
       <tr>
     		<td><b>article: {{poduct.id}}</b><br><i>{{poduct.denomination}} ({{poduct.price_group}})</i><br>box quantity: {{poduct.box_quantity}}</td>
     		<td></td>
-    		<td>{{poduct.list_price}}</td>
-    		<td>q</td>
-        <td>t</td>
+    		<td align="center">{{poduct.list_price}}</td>
     	</tr>
       {% endfor %}
     </table>
     <hr>
 
-    <p><strong>Total: $8878.28</strong></p>
+    <p><strong>Total: {{commercialoffer.total}}</strong></p>
 </body>
 </html>

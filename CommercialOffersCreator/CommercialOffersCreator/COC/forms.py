@@ -53,3 +53,14 @@ class PriceGroupDiscountFrom(forms.ModelForm):
             'price_group': forms.Select(attrs={'class': 'form-control'}),
             'discount': forms.NumberInput(attrs={'class': 'form-control'}),
         }
+
+
+class CommercialOfferForm(forms.ModelForm):
+    class Meta:
+        model = CommercialOffer
+        fields = ['customer', 'products']
+
+        widgets = {
+            'customer': forms.Select(attrs={'class': 'form-control'}),
+            'products':forms.SelectMultiple(attrs={'class':'form-control'}),
+        }

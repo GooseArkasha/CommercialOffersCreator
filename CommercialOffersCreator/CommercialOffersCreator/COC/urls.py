@@ -26,7 +26,13 @@ urlpatterns = [
     path('price_group_discount/<str:id>/update', PriceGroupDiscountUpdate.as_view(), name='price_group_discount_update_url'),
     path('price_group_discount/<str:id>/delete', PriceGroupDiscountDelete.as_view(), name='price_group_discount_delete_url'),
 
-    path('index', index),
-    path('pdf_view/', ViewPDF.as_view(), name="pdf_view"),
-    path('pdf_download/', DownloadPDF.as_view(), name="pdf_download"),
+    path('', commercial_offers, name='commercial_offers_list_url'),
+    path('commercial_offer/create/', CommercialOfferCreate.as_view(), name='commercial_offer_create_url'),
+    path('commercial_offer/<str:id>/', CommercialOfferDetail.as_view(), name='commercial_offer_ditail_url'),
+    path('commercial_offer/<str:id>/update', CommercialOfferUpdate.as_view(), name='commercial_offer_update_url'),
+    path('commercial_offer/<str:id>/delete', CommercialOfferDelete.as_view(), name='commercial_offer_delete_url'),
+
+    path('index/<str:id>/', index, name='get_pdf_url'),
+    path('pdf_view/<str:id>/', ViewPDF.as_view(), name="pdf_view"),
+    path('pdf_download/<str:id>/', DownloadPDF.as_view(), name="pdf_download"),
 ]

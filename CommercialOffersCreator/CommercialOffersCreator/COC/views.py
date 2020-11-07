@@ -16,6 +16,8 @@ from django.template.loader import get_template
 from django.views import View
 from xhtml2pdf import pisa
 
+from decimal import Decimal
+
 # Create your views here.
 def customers_list(request):
     customers = Customer.objects.all()
@@ -33,6 +35,10 @@ def price_group_discounts(request):
     pricegroupdiscounts = PriceGroupDiscount.objects.all()
     return render(request, 'COC/price_group_discounts_list.html', context={'pricegroupdiscounts': pricegroupdiscounts})
 
+def commercial_offers(request):
+    commercialoffers = CommercialOffer.objects.all()
+    return render(request, 'COC/commercial_offers_list.html', context={'commercialoffers': commercialoffers})
+
 
 class CustomerDetail(ObjectsDetailMixin, View):
     model = Customer
@@ -49,6 +55,11 @@ class PriceGroupDetail(ObjectsDetailMixin, View):
 class PriceGroupDiscountDetail(ObjectsDetailMixin, View):
     model = PriceGroupDiscount
     template = 'COC/price_group_discount_ditail.html'
+
+class CommercialOfferDetail(ObjectsDetailMixin, View):
+    model = CommercialOffer
+    template = 'COC/commercial_offer_ditail.html'
+
 
 
 class CustomerCreate(LoginRequiredMixin, ObjectCreateMixin, View):
@@ -70,6 +81,12 @@ class PriceGroupDiscountCreate(LoginRequiredMixin, ObjectCreateMixin, View):
     form_model = PriceGroupDiscountFrom
     template  = 'COC/price_group_discount_create.html'
     raise_exeption = True
+
+class CommercialOfferCreate(LoginRequiredMixin, ObjectCreateMixin, View):
+    form_model = CommercialOfferForm
+    template  = 'COC/commercial_offer_create.html'
+    raise_exeption = True
+
 
 
 class CustomerUpdate(LoginRequiredMixin, ObjectUpdateMixin, View):
@@ -96,6 +113,13 @@ class PriceGroupDiscountUpdate(LoginRequiredMixin, ObjectUpdateMixin, View):
     template = 'COC/price_group_discount_update.html'
     raise_exeption = True
 
+class CommercialOfferUpdate(LoginRequiredMixin, ObjectUpdateMixin, View):
+    model = CommercialOffer
+    model_form = CommercialOfferForm
+    template = 'COC/commercial_offer_update.html'
+    raise_exeption = True
+
+
 
 class CustomerDelete(LoginRequiredMixin, ObjectDeleteMixin, View):
     model = Customer
@@ -121,6 +145,13 @@ class PriceGroupDiscountDelete(LoginRequiredMixin, ObjectDeleteMixin, View):
     redirect_url = 'price_group_discounts_list_url'
     raise_exeption = True
 
+class CommercialOfferDelete(LoginRequiredMixin, ObjectDeleteMixin, View):
+    model = CommercialOffer
+    template = 'COC/commercial_offer_delete.html'
+    redirect_url = 'commercial_offer_delete_url'
+    raise_exeption = True
+
+
 
 def render_to_pdf(template_src, context_dict={}):
 	template = get_template(template_src)
@@ -140,53 +171,32 @@ seller = {
 	"contactPersonEmail": "email@mail.com",
 	}
 
-customer = {
-	"denomination": "Dennnis Ivanov Company",
-	"address": "123 Street name",
-    "index": "1234",
-	"telephone": "88005553535",
-	"contactPersonPhoneNumber": "86665554433",
-	"contactPersonEmail": "email@mail.com",
-	}
-
-products = [
-    {
-        "denomination": "Alfa pump",
-    	"id": 1,
-        "box_quantity": "1",
-    	"price_group": "pumps",
-    	"list_price": 1.5,
-    },
-    {
-        "denomination": "Beta pump",
-    	"id": 2,
-        "box_quantity": "1",
-    	"price_group": "pumps",
-    	"list_price": 3,
-    },
-]
-
 
     #Opens up page as PDF
 class ViewPDF(View):
-	def get(self, request, *args, **kwargs):
-
-		pdf = render_to_pdf('COC/pdf_template.html', context_dict={'seller': seller, 'customer': customer, 'products': products})
-		return HttpResponse(pdf, content_type='application/pdf')
+  def get(self, request, id, *args, **kwargs):
+    commercialoffer = CommercialOffer.objects.get(id=id)
+    commercialoffer.total = Decimal('0.00')
+    for product in commercialoffer.products.all():
+        commercialoffer.total = commercialoffer.total + product.list_price
+    print(commercialoffer.total)
+    pdf = render_to_pdf('COC/pdf_template.html', context_dict={'seller': seller, 'commercialoffer':commercialoffer})
+    return HttpResponse(pdf, content_type='application/pdf')
 
 
 #Automaticly downloads to PDF file
 class DownloadPDF(View):
-	def get(self, request, *args, **kwargs):
+  def get(self, request, id, *args, **kwargs):
+    commercialoffer = CommercialOffer.objects.get(id=id)
+    pdf = render_to_pdf('COC/pdf_template.html', context_dict={'seller': seller, 'commercialoffer':commercialoffer})
+    response = HttpResponse(pdf, content_type='application/pdf')
+    filename = "Invoice_%s.pdf" %("12341231")
+    content = "attachment; filename='%s'" %(filename)
+    response['Content-Disposition'] = content
+    return response
 
-		pdf = render_to_pdf('COC/pdf_template.html', context_dict={'seller': seller, 'customer': customer, 'products': products})
-
-		response = HttpResponse(pdf, content_type='application/pdf')
-		filename = "Invoice_%s.pdf" %("12341231")
-		content = "attachment; filename='%s'" %(filename)
-		response['Content-Disposition'] = content
-		return response
-
-def index(request):
-	context = {}
-	return render(request, 'COC/index.html', context)
+def index(request, id):
+  commercialoffer = CommercialOffer.objects.get(id=id)
+  print(commercialoffer.id)
+  print(commercialoffer.creation_date)
+  return render(request, 'COC/index.html', context={'commercialoffer':commercialoffer})

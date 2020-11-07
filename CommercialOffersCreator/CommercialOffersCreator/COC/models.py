@@ -84,3 +84,28 @@ class Product(models.Model):
 
     def get_delete_url(self):
         return reverse('product_delete_url', kwargs={'id': self.id})
+
+
+
+class CommercialOffer(models.Model):
+    id = models.AutoField(primary_key=True) #id==articul
+    creation_date = models.DateTimeField(auto_now_add=True)
+    customer = models.ForeignKey(Customer, on_delete = models.CASCADE, blank=True)
+    products = models.ManyToManyField('Product', blank=True)
+    total = models.DecimalField(decimal_places=2, max_digits=10, blank=True, null=True)
+
+    def __str__(self):
+        return str(self.id) + ": " + self.customer.denomination
+
+    def save(self, *args, **kwargs):
+        self.total = 0
+        super().save(*args, **kwargs)
+
+    def get_absolut_url(self):
+        return reverse('commercial_offer_ditail_url', kwargs={'id': self.id})
+
+    def get_update_url(self):
+        return reverse('commercial_offer_update_url', kwargs={'id': self.id})
+
+    def get_delete_url(self):
+        return reverse('commercial_offer_delete_url', kwargs={'id': self.id})

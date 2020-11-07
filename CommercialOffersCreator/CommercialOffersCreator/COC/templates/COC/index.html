@@ -7,7 +7,7 @@
 
 	<style>
 		body{
-			background-color: #764ba2;
+			background-color: #696969;
 		}
 
 		.card{
@@ -26,10 +26,10 @@
 			<div class="col-md">
 				<div class="card card-body">
 					 <div class="text-center">
-					<h3>View Invoices or download directly to PDF</h3>
-					<p>Turn HTML templates into PDF's with Django + XHTML 2 PDF. This example gives you the option of  <br> view a template as a PDF or Downloading directly.</p>
-					<a class="btn btn-info" href="{% url 'pdf_view' %}" target="_blank">View Invoice</a>
-					<a class="btn btn-info"  href="{% url 'pdf_download' %}">Download Invoice</a>
+					<h3>View Commercial offer {{commercialoffer.id}}: {{commercialoffer.customer.denomination}} or download directly to PDF</h3>
+					<p>View a commercial offer as a PDF or Downloading directly.</p>
+					<a class="btn btn-info" href="{% url 'pdf_view' id=commercialoffer.id %}" target="_blank">View Commercial Offer</a>
+					<a class="btn btn-info"  href="{% url 'pdf_download' id=commercialoffer.id%}">Download Commercial Offer</a>
 					</div>
 				</div>
 			</div>
