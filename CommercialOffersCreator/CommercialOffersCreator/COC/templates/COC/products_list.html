@@ -1,0 +1,13 @@
+{% extends 'COC/base_COC.html' %}
+
+{% block title %}
+  Products list
+{% endblock %}
+
+{% block content %}
+  <h1 class="mb-5">Товары:</h1>
+
+  {% for product in products %}
+    {% include 'COC/includes/product_card_template.html' %}
+  {% endfor %}
+{% endblock %}

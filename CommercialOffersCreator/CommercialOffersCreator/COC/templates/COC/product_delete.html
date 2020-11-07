@@ -1,0 +1,16 @@
+{% extends 'COC/base_COC.html' %}
+
+{% block title %}
+    Delete Product "{{ product.denomination}}"
+{% endblock %}
+
+{% block content %}
+    <form action="{{ product.get_delete_url }}" method="post">
+        {% csrf_token %}
+
+        <h1>Вы уверены, что хотите удалить этот товар?</h1>
+
+        <a href="{{ product.get_absolute_url }}">Закрыть</a>
+        <button type="submit" class='btn btn-danger'>Удалить</button>
+    </form>
+{% endblock %}

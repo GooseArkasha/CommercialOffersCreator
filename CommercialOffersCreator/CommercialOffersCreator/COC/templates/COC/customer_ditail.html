@@ -1,0 +1,24 @@
+{% extends 'COC/base_COC.html' %}
+
+{% block title %}
+  Cestomer: {{customer.denomination}}
+{% endblock %}
+
+
+{% block content %}
+  <h1 class="mt-5 mb-4">{{customer.denomination}}</h1>
+  <p><b>Адрес:</b> {{customer.address}}</p>
+  <p><b>Индекс:</b> {{customer.index}}</p>
+  <p><b>Телефон:</b> {{customer.telephone}}</p>
+  <h5 class="mt-4 mb-3">Дополнительная информация</h5>
+  <p><b>Телефон контактного лица:</b> {{customer.contactPersonPhoneNumber}}</p>
+  <p><b>Эл. почта контактного лица:</b> {{customer.contactPersonEmail}}</p>
+  <p><b>Эл. почта контактного лица:</b> {{customer.contactPersonEmail}}</p>
+  <p><b>Скидки по группам товаров:</b></p>
+  <p>
+    {% for tag in customer.price_group_discounts.all %}
+      <p>{{tag.price_group.denomination}}: {{tag.discount}}</p>
+    {% endfor %}
+  </p>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'COC/base_COC.html' %}
+
+{% block title %}
+  Price Group list
+{% endblock %}
+
+{% block content %}
+  <h1 class="mb-5">Группы товаров:</h1>
+
+  {% for pricegroup in pricegroups %}
+    {% include 'COC/includes/price_group_card_template.html' %}
+  {% endfor %}
+{% endblock %}

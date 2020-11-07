@@ -1,0 +1,103 @@
+<head>
+<style>
+    @page {
+        size: a4 portrait;
+        @frame header_frame {           /* Static Frame */
+            -pdf-frame-content: header_content;
+            left: 50pt; width: 512pt; top: 50pt; height: 40pt;
+        }
+        @frame content_frame {          /* Content Frame */
+            left: 50pt; width: 512pt; top: 90pt; height: 632pt;
+        }
+        @frame footer_frame {           /* Another static Frame */
+            -pdf-frame-content: footer_content;
+            left: 50pt; width: 512pt; top: 772pt; height: 20pt;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+    <div id="header_content">
+      <table>
+        <tr>
+          <td><h1 size='10'>PUMPS & FILTERS LLC</h1></td>
+          <td><h1>Commercial offer</h1></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Content for Static Frame 'footer_frame' -->
+    <div id="footer_content">(c) - page <pdf:pagenumber>
+        of <pdf:pagecount>
+    </div>
+
+    <!-- HTML Content -->
+    <br>
+    <table>
+        <tr>
+          <td></td>
+          <td><h3>Seller</h3></td>
+          <td><h3>Customer</h3></td>
+        </tr>
+    		<tr>
+          <td><p><i>company name</i></p></td>
+    			<td>{{seller.denomination}}</td>
+    			<td>{{customer.denomination}}</td>
+    		</tr>
+    		<tr>
+          <td><p><i>address</i></p></td>
+    			<td>{{seller.address}}</td>
+    			<td>{{customer.address}}</td>
+    		</tr>
+    		<tr>
+          <td><p><i>index</i></p></td>
+    			<td>{{seller.index}}</td>
+    			<td>{{customer.index}}</td>
+    		</tr>
+        <tr>
+          <td><p><i>telephone</i></p></td>
+          <td>{{seller.telephone}}</td>
+          <td>{{customer.telephone}}</td>
+        </tr>
+        <tr>
+          <td><p><i>Contact Person Phone Number</i></p></td>
+          <td>{{seller.contactPersonPhoneNumber}}</td>
+          <td>{{customer.contactPersonPhoneNumber}}</td>
+        </tr>
+        <tr>
+          <td><p><i>Contact Person Email</i></p></td>
+          <td>{{seller.contactPersonEmail}}</td>
+          <td>{{customer.contactPersonEmail}}</td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <br>
+
+    <hr>
+
+    <table cellpadding="5">
+      <tr>
+    		<th>PRODUCT</th>
+    		<th></th>
+        <th>LIST PRICE</th>
+    		<th>QUANTITY</th>
+    		<th>TOTAL</th>
+    	</tr>
+      {% for poduct in products %}
+      <tr>
+    		<td><b>article: {{poduct.id}}</b><br><i>{{poduct.denomination}} ({{poduct.price_group}})</i><br>box quantity: {{poduct.box_quantity}}</td>
+    		<td></td>
+    		<td>{{poduct.list_price}}</td>
+    		<td>q</td>
+        <td>t</td>
+    	</tr>
+      {% endfor %}
+    </table>
+    <hr>
+
+    <p><strong>Total: $8878.28</strong></p>
+</body>
+</html>

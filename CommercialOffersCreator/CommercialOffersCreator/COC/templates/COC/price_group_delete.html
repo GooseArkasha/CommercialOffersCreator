@@ -1,0 +1,16 @@
+{% extends 'COC/base_COC.html' %}
+
+{% block title %}
+    Delete Price group"{{ pricegroup.denomination}}"
+{% endblock %}
+
+{% block content %}
+    <form action="{{ pricegroup.get_delete_url}}" method="post">
+        {% csrf_token %}
+
+        <h1>Вы уверены, что хотите удалить эту группу?</h1>
+
+        <a href="{{ pricegroup.get_absolute_url}}">Закрыть</a>
+        <button type="submit" class='btn btn-danger'>Удалить</button>
+    </form>
+{% endblock %}
