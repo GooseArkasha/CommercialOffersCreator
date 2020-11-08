@@ -16,7 +16,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Commercial Offers Creator</a>
+      <a class="navbar-brand" href="{% url 'commercial_offers_list_url' %}">Commercial Offers Creator</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -35,7 +35,8 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{% url 'price_groups_list_url' %}">Price groups</a>
-              <a class="dropdown-item" href="{% url 'price_group_discounts_list_url' %}">discounts</a>
+              <a class="dropdown-item" href="{% url 'price_group_discounts_list_url' %}">Discounts</a>
+              <a class="dropdown-item" href="{% url 'commercial_offers_list_url' %}">Commercial offers</a>
             </div>
           </li>
         </ul>

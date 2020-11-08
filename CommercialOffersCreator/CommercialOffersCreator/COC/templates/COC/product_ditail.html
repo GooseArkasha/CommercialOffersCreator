@@ -7,10 +7,10 @@
 
 {% block content %}
   <h1 class="mt-5 mb-4">{{product.denomination}}</h1>
-  <p><b>Описание:</b> {{product.description}}</p>
-  <p><b>Количество в упаковке:</b> {{product.box_quantity}}</p>
-  <p><b>Минимальное количество товара для заказа:</b> {{product.min_order_quantity}}</p>
-  <p><b>Группа товара:</b> {{product.price_group.denomination}}</p>
-  <p><b>Закупочная цена:</b> {{product.cost}}</p>
-  <p><b>Прейскурантная цена:</b> {{product.list_price}}</p>
+  <p><b>Description:</b> {{product.description}}</p>
+  <p><b>Box quantity:</b> {{product.box_quantity}}</p>
+  <p><b>Min order quantity:</b> {{product.min_order_quantity}}</p>
+  <p><b>Price group:</b> {{product.price_group.denomination}}</p>
+  <p><b>Cost:</b> {{product.cost}}</p>
+  <p><b>List Price:</b> {{product.list_price}}</p>
 {% endblock %}

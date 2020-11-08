@@ -8,9 +8,8 @@
     <form action="{{ price_group_discount_delete_url }}" method="post">
         {% csrf_token %}
 
-        <h1>Вы уверены, что хотите удалить эту скидку?</h1>
+        <h1>Are you sure you want to remove this discount?</h1>
 
-        <a href="{{ price_group_discounts_list_url }}">Закрыть</a>
-        <button type="submit" class='btn btn-danger'>Удалить</button>
+        <button type="submit" class='btn btn-danger'>Delete</button>
     </form>
 {% endblock %}

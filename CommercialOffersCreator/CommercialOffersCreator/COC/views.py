@@ -148,7 +148,7 @@ class PriceGroupDiscountDelete(LoginRequiredMixin, ObjectDeleteMixin, View):
 class CommercialOfferDelete(LoginRequiredMixin, ObjectDeleteMixin, View):
     model = CommercialOffer
     template = 'COC/commercial_offer_delete.html'
-    redirect_url = 'commercial_offer_delete_url'
+    redirect_url = 'commercial_offers_list_url'
     raise_exeption = True
 
 
@@ -163,8 +163,8 @@ def render_to_pdf(template_src, context_dict={}):
 	return None
 
 seller = {
-	"denomination": "Dennnis Ivanov Company",
-	"address": "123 Street name",
+	"denomination": "Pumps and filters LLC",
+	"address": "Moscow",
     "index": "1234",
 	"telephone": "88005553535",
 	"contactPersonPhoneNumber": "86665554433",
@@ -188,9 +188,14 @@ class ViewPDF(View):
 class DownloadPDF(View):
   def get(self, request, id, *args, **kwargs):
     commercialoffer = CommercialOffer.objects.get(id=id)
+    commercialoffer = CommercialOffer.objects.get(id=id)
+    commercialoffer.total = Decimal('0.00')
+    for product in commercialoffer.products.all():
+        commercialoffer.total = commercialoffer.total + product.list_price
+    print(commercialoffer.total)
     pdf = render_to_pdf('COC/pdf_template.html', context_dict={'seller': seller, 'commercialoffer':commercialoffer})
     response = HttpResponse(pdf, content_type='application/pdf')
-    filename = "Invoice_%s.pdf" %("12341231")
+    filename = "CommercialOffer_%s.pdf" %(str(commercialoffer.id))
     content = "attachment; filename='%s'" %(filename)
     response['Content-Disposition'] = content
     return response

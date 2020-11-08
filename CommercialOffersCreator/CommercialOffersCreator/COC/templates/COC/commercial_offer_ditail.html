@@ -6,7 +6,7 @@
 
 
 {% block content %}
-  <h1 class="mt-5 mb-4">{{commercialoffer.creation_date}}</h1>
+  <h1 class="mt-5 mb-4">Commercial offer {{commercialoffer.id}} ({{commercialoffer.creation_date}})</h1>
   <p><b>Customer:</b> {{commercialoffer.customer.denomination}}</p>
   <p><b>items:</b></p>
   {% for product in commercialoffer.products.all %}

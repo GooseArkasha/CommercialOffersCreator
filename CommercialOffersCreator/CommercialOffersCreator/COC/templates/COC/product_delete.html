@@ -8,9 +8,8 @@
     <form action="{{ product.get_delete_url }}" method="post">
         {% csrf_token %}
 
-        <h1>Вы уверены, что хотите удалить этот товар?</h1>
+        <h1>Are you sure you want to delete this product?</h1>
 
-        <a href="{{ product.get_absolute_url }}">Закрыть</a>
-        <button type="submit" class='btn btn-danger'>Удалить</button>
+        <button type="submit" class='btn btn-danger'>Delete</button>
     </form>
 {% endblock %}

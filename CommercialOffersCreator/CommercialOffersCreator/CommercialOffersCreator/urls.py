@@ -17,7 +17,10 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 
+from .views import redirect_COC
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('COC/', include('COC.urls'))
+    path('COC/', include('COC.urls')),
+    path('', redirect_COC)
 ]

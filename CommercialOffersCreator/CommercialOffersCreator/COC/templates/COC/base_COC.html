@@ -3,16 +3,17 @@
 {% block admin-panel %}
   <div class="btn-group">
     <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-      Создать
+      Create
     </button>
     <div class="dropdown-menu">
-      <a class="dropdown-item" href="{% url 'customer_create_url' %}">Заказчика</a>
-      <a class="dropdown-item" href="{% url 'product_create_url' %}">Товар</a>
-      <a class="dropdown-item" href="{% url 'price_group_create_url' %}">Группу товаров</a>
-      <a class="dropdown-item" href="{% url 'price_group_discount_create_url' %}">Скидку</a>
+      <a class="dropdown-item" href="{% url 'customer_create_url' %}">Customer</a>
+      <a class="dropdown-item" href="{% url 'product_create_url' %}">Product</a>
+      <a class="dropdown-item" href="{% url 'price_group_create_url' %}">Price group</a>
+      <a class="dropdown-item" href="{% url 'price_group_discount_create_url' %}">Discount</a>
+      <a class="dropdown-item" href="{% url 'commercial_offer_create_url' %}">Commercial offer</a>
     </div>
   </div>
 
-  <a href="{{ admin_object.get_update_url }}" class="btn btn-light edit" style="{% if detail %} display: block; {% endif %}">Изменить</a>
-  <a href="{{ admin_object.get_delete_url }}" class="btn btn-danger delete" style="{% if detail %} display: block; {% endif %}">Удалить</a>
+  <a href="{{ admin_object.get_update_url }}" class="btn btn-light edit" style="{% if detail %} display: block; {% endif %}">Edit</a>
+  <a href="{{ admin_object.get_delete_url }}" class="btn btn-danger delete" style="{% if detail %} display: block; {% endif %}">Delete</a>
 {% endblock %}
